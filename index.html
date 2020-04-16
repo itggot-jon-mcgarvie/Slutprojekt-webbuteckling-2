@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <p>hej</p>
+    <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/CkFygSn9Pmw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+    <h1>Search for a song</h1>
+    <!-- <div class="text" v-on:keyup.enter="findLyric">
+        <input type="text" placeholder="Artist">
+        <input type="text" placeholder="Song">
+    </div> -->
+    <form id="app" @submit="findLyric" action="/" method="GET">
+        <input type="text" name="artist" id="artist" v-model="artist" placeholder="Artist">
+        <input type="text" name="song" id="song" v-model="song" placeholder="Song">
+        <input type="submit" value="Search">
+    </form>
+
+    <div id="app">
+        <p>{{lyrics}}</p>
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="script.js"></script>
+</html>
