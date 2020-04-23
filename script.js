@@ -6,7 +6,7 @@ var vueApp = new Vue({
     //variabler
     artist:null,
     song:null,
-    lyrics:null
+    text:""
   },
 
   methods: {
@@ -18,21 +18,21 @@ var vueApp = new Vue({
 
       request.onreadystatechange = function () {
         if (this.readyState === 4) {
-          console.log('Status:', this.status);
           statusCode = this.status;
-          // if (statusCode == 200){
-          //   e.lyrics = this.responseText;
-          // }else{
-          //   //set error or something
-          // };
-          console.log('Headers:', this.getAllResponseHeaders());
-          console.log('Body:', this.responseText);
+          if (statusCode == 200){
+            console.log(this.responseText);
+            vueApp.text = JSON.parse(this.responseText).lyrics.replace(/\n/g, '<br />')
+            // = JSON.parse(this.responseText).lyrics.replace(/\n/g, '<br>');
+          }else{
+            vueApp.text = "Can't find the lyrics"
+          };
         }
       };
 
       request.send();
       e.preventDefault();
-    }
+    },
+    
   }
 })
 

@@ -14,14 +14,18 @@
         <input type="text" placeholder="Artist">
         <input type="text" placeholder="Song">
     </div> -->
-    <form id="app" @submit="findLyric" action="/" method="GET">
-        <input type="text" name="artist" id="artist" v-model="artist" placeholder="Artist">
-        <input type="text" name="song" id="song" v-model="song" placeholder="Song">
-        <input type="submit" value="Search">
-    </form>
+    
 
     <div id="app">
-        <p>{{lyrics}}</p>
+        <form id="form" @submit="findLyric" action="/" method="GET">
+            <input type="text" name="artist" id="artist" v-model="artist" placeholder="Artist">
+            <input type="text" name="song" id="song" v-model="song" placeholder="Song">
+            <input type="submit" value="Search">
+        </form>
+        <p>
+            {{text}}
+            <!-- problemet är troligen att {{text}} tar exakt det som står istället för att föra in det som html -->
+        </p>
     </div>
 
 </body>
