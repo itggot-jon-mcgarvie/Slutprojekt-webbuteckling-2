@@ -26,9 +26,17 @@
             {{text}}
             <!-- problemet är troligen att {{text}} tar exakt det som står istället för att föra in det som html -->
         </p>
+        <!-- lägg kanske till method="GET" på form -->
+        <form id="video" action="#" @submit="findVideo"> 
+            <input type="text" id="search" placeholder="Type something..." autocomplete="off">
+            <input type="submit" value="Search">
+        </form>
+        <div id="results"></div>
     </div>
-
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="script.js"></script>
+<script src="https://apis.google.com/js/api.js?=init"></script>
 </html>
+
+<!-- https://www.youtube.com/watch?v=-vH2eZAM30s  GOOD SHIT HOMIE, är vid typ 7:40 atm -->

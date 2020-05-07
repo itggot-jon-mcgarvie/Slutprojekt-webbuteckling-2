@@ -20,8 +20,7 @@ var vueApp = new Vue({
         if (this.readyState === 4) {
           statusCode = this.status;
           if (statusCode == 200){
-            console.log(this.responseText);
-            vueApp.text = JSON.parse(this.responseText).lyrics.replace(/\n/g, '<br />')
+            vueApp.text = JSON.parse(this.responseText).lyrics
             // = JSON.parse(this.responseText).lyrics.replace(/\n/g, '<br>');
           }else{
             vueApp.text = "Can't find the lyrics"
@@ -32,7 +31,28 @@ var vueApp = new Vue({
       request.send();
       e.preventDefault();
     },
-    
+    findVideo: function(e){
+      e.preventDefault();
+      // prepare the request
+      var request = gapi.client.youtube.search.list({
+        part: "snippet",
+        type: "video",
+        q: encodeURIComponent(this.search).replace(/%20/g, "+"),
+        order: "viewCount",
+        maxResults: 1,
+      });
+      //execute the request
+      request.execute(function(response){
+        console.log(response);
+      });
+    },
+
+    init: function(){
+      gapi.client.setApiKey("AIzaSyANcbM-uHNXXypipbVOYmwPVV7m9BI2o5c");
+      gapi.client.load("youtube", "v3", function() {
+        //yt api is ready
+      });
+    },
   }
 })
 
@@ -40,4 +60,4 @@ var vueApp = new Vue({
 
 
 
-// key för youtube api : AIzaSyC4e0YtI3DZVjDA2Rn403tLMb-zCPRS0Jk
+// key för youtube api : AIzaSyANcbM-uHNXXypipbVOYmwPVV7m9BI2o5c
