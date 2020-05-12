@@ -1,3 +1,9 @@
 p {
     white-space: pre-line;
+    font-size: medium;
+}
+
+.container {
+    display: flex;
+    padding: 1rem;
 }

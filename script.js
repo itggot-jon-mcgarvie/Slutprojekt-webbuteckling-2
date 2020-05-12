@@ -6,7 +6,10 @@ var vueApp = new Vue({
     //variabler
     artist:null,
     song:null,
-    text:""
+    text:"",
+    title:null,
+    videoid:null,
+    apiKey: "AIzaSyBQC7ZnE9CiiQAPMs-xoue5dh2GPsJfc-w"
   },
 
   methods: {
@@ -14,14 +17,20 @@ var vueApp = new Vue({
     findLyric: function(e){
       var request = new XMLHttpRequest();
 
-      request.open('GET', 'https://api.lyrics.ovh/v1/' + this.artist +'/' + this.song);
+      var artistStr = this.artist;
+      var songStr = this.song;
+
+      request.open('GET', 'https://api.lyrics.ovh/v1/' + artistStr +'/' + songStr);
+
+      var search = artistStr.concat(" ");
+      search = search.concat(songStr);
+      videoSearch(vueApp.apiKey,search,1);
 
       request.onreadystatechange = function () {
         if (this.readyState === 4) {
           statusCode = this.status;
           if (statusCode == 200){
             vueApp.text = JSON.parse(this.responseText).lyrics
-            // = JSON.parse(this.responseText).lyrics.replace(/\n/g, '<br>');
           }else{
             vueApp.text = "Can't find the lyrics"
           };
@@ -31,33 +40,20 @@ var vueApp = new Vue({
       request.send();
       e.preventDefault();
     },
-    findVideo: function(e){
-      e.preventDefault();
-      // prepare the request
-      var request = gapi.client.youtube.search.list({
-        part: "snippet",
-        type: "video",
-        q: encodeURIComponent(this.search).replace(/%20/g, "+"),
-        order: "viewCount",
-        maxResults: 1,
-      });
-      //execute the request
-      request.execute(function(response){
-        console.log(response);
-      });
-    },
-
-    init: function(){
-      gapi.client.setApiKey("AIzaSyANcbM-uHNXXypipbVOYmwPVV7m9BI2o5c");
-      gapi.client.load("youtube", "v3", function() {
-        //yt api is ready
-      });
-    },
   }
-})
+});
 
+function videoSearch(key,search,maxresults){
+  var video = "";
+  $("#video").empty();
+  $.get("https://www.googleapis.com/youtube/v3/search?key=" + key + "&type=video&part=snippet&maxResults=" + maxresults + "&q=" + search,function(data){
+    data.items.forEach(item => {
+      video = `<iframe width="420" height="315" src="http://www.youtube.com/embed/${item.id.videoId}" frameborder="0"></iframe>`;
+      $("#video").append(video)
+    })
+  });
+};
 
-
-
+// om jag känner för det kan jag skriva om det i vue.js men vi får se, jquery är så mycket lättare
 
 // key för youtube api : AIzaSyANcbM-uHNXXypipbVOYmwPVV7m9BI2o5c
