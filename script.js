@@ -48,7 +48,8 @@ function videoSearch(key,search,maxresults){
   $("#video").empty();
   $.get("https://www.googleapis.com/youtube/v3/search?key=" + key + "&type=video&part=snippet&maxResults=" + maxresults + "&q=" + search,function(data){
     data.items.forEach(item => {
-      video = `<iframe width="420" height="315" src="http://www.youtube.com/embed/${item.id.videoId}" frameborder="0"></iframe>`;
+      video = `<iframe width="640" height="400" src="http://www.youtube.com/embed/${item.id.videoId}" frameborder="0"></iframe>`;
+      // Fungerar inte för populära videos i localhost då det finns settings för skaparen av videon som gör att det bara funkar på public domains
       $("#video").append(video)
     })
   });

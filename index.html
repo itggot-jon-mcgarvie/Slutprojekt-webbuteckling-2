@@ -4,22 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
-    <h1>Search for a song</h1>
+    <div class="title">
+        Lyric and video searcher
+    </div>
     <div id="app">
         <form id="form" @submit="findLyric" action="/" method="GET">
             <input type="text" name="artist" id="artist" v-model="artist" placeholder="Artist">
             <input type="text" name="song" id="song" v-model="song" placeholder="Song">
-            <input type="submit" value="Search">
+            <input type="submit" value="Search" id="submit">
         </form>
+        
         <div class="container">
             <p>{{text}}</p>
-            <div id="video"></div>
         </div>
     </div>
-    
+    <div id="video"></div>
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
